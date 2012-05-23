@@ -1,0 +1,35 @@
+[Oo]bj/
+[Bb]in/
+*.suo
+*.user
+/TestResults
+*.vspscc
+*.vssscc
+
+*resharper.user
+# Visual Studio
+[Dd]ebug/
+[Rr]elease/
+*.sln.cache
+*.suo
+*.csproj.user
+
+# Resharper
+*[Rr]e[Ss]harper.user
+_ReSharper.*/
+*.cache
+.cache
+build/
+version.txt
+
+#OS junk files
+[Tt]humbs.db
+*.DS_Store
+
+#Visual Studio files
+*.bak
+*.[Cc]ache
+*.log
+[Dd]ebug*/
+[Rr]elease*/
+[Bb]uild/
