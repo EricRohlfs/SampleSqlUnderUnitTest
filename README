@@ -5,3 +5,7 @@ The biggest benefit is you can simulate the response from sql as close to the wi
 I have not added a full compliment of tests and error handling, but this is a sample to start from.
 
 Both the Console App and the Unit Tests can be run.  You will need to create a database, the scritps are in the DatabaseScripts folder.
+
+The object returned from Sql is nested Xml.
+
+I am using the GetValue(0) vs using Xml.  That would require using an XmlReader, which is not supporeted under the IDbCommand interface.
