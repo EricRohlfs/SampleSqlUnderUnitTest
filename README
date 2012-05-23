@@ -1,0 +1,7 @@
+Since SqlCommand is a sealed class, you cannot mock it.  What do you do if you want to put your database calls under test?  This is just one example of what can be done.  There is a bit of smoke and mirrors where one section isn't really under test.  
+
+The biggest benefit is you can simulate the response from sql as close to the wire as possible.  
+
+I have not added a full compliment of tests and error handling, but this is a sample to start from.
+
+Both the Console App and the Unit Tests can be run.  You will need to create a database, the scritps are in the DatabaseScripts folder.
