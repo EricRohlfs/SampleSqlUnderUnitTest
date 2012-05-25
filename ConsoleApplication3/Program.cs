@@ -5,7 +5,9 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics.Contracts;
 using System.IO;
+using System.Reflection;
 using System.Xml.Serialization;
+using log4net;
 
 
 namespace ConsoleApplication3
@@ -30,18 +32,22 @@ namespace ConsoleApplication3
     /// <typeparam name="TOutEntity"></typeparam>
     public class CallStoredProcWithXmlOut<TOutEntity>
     {
+       
+
         public TOutEntity Execute(IDbConnection connection, IDbCommand sqlCommand, Func<string, TOutEntity> mapper)
         {
-            string rawXml;
+            string rawXml = null;
+            
             using (connection)
             {
                 connection.Open();
                 sqlCommand.Connection = connection;
                 var reader = sqlCommand.ExecuteReader();
-                reader.Read();//just need to advance the reader 
-                rawXml = (string)reader.GetValue(0);
-                connection.Close();//IDisposable should catch this in the using, but here for good measure.
+                reader.Read(); //just need to advance the reader 
+                rawXml = (string) reader.GetValue(0);
+                connection.Close(); //IDisposable should catch this in the using, but here for good measure.
             }
+            
             var mapperResult = mapper.Invoke(rawXml);
             return mapperResult;
         }

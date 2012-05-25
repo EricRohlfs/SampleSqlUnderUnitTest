@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using NUnit.Framework;
 using Moq;
@@ -65,6 +67,16 @@ namespace ConsoleApplication3
          RepoResult = Repo.LoadPerson(SqlConn.Object, SqlCommand.Object, mapper.MapFromRawXmlString);
      }
 
+
+     [Test]
+     [ExpectedException(typeof(SqlException))]
+     public void Cannot_ConnectToDataBase_ThrowsSqlException()
+     {
+         var mapper = new PersonMapper();
+         SqlConn.Setup(x => x.Open()).Callback(ThrowSqlException);
+         RepoResult = Repo.LoadPerson(SqlConn.Object, SqlCommand.Object, mapper.MapFromRawXmlString);
+     }
+
      [Test]
      public void DataReader_Called_Read_And_GetValue0_JustOneTime()
      {
@@ -120,7 +132,18 @@ namespace ConsoleApplication3
      }
 
 
-     
+     #region throwing sql exceptions which is a sealed class.
+     public void ThrowSqlException()
+     {
+         throw Instantiate<SqlException>();
+     }
+
+     public static T Instantiate<T>() where T : class
+     {
+         return System.Runtime.Serialization.FormatterServices.GetUninitializedObject(typeof(T)) as T;
+     }
+     #endregion 
+
 
      public string GoodPersonRawXml()
      {
