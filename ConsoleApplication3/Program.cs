@@ -5,9 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics.Contracts;
 using System.IO;
-using System.Reflection;
 using System.Xml.Serialization;
-using log4net;
 
 
 namespace ConsoleApplication3

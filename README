@@ -10,4 +10,3 @@ The object returned from Sql is nested Xml.
 
 I am using the GetValue(0) vs using Xml.  That would require using an XmlReader, which is not supporeted under the IDbCommand interface.
 
-A change test.
